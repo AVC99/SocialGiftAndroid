@@ -1,4 +1,4 @@
-package com.example.socialgift.ui.notifications;
+package com.example.socialgift.ui.fragments.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
