@@ -5,4 +5,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="search_menu_title">Search</string>
     <string name="profile_title">Profile</string>
+    <string name="add_new_product">Add new product</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="create_account">Create Account</string>
+    <string name="app_logo_description">Social gift logo</string>
 </resources>
