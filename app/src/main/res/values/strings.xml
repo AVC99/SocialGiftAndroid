@@ -10,4 +10,16 @@
     <string name="create_account">Create Account</string>
     <string name="app_logo_description">Social gift logo</string>
     <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="password">Password</string>
+    <string name="messages">Messages</string>
+    <string name="username">Username</string>
+    <string name="shopping_bag_icon_description">Shopping Bag icon</string>
+    <string name="item_name">Item Name</string>
+    <string name="money_icon_decription">Money icon decription</string>
+    <string name="_999_price">999€</string>
+    <string name="add_to_wishlist">Add to wishlist</string>
+    <string name="gift">Gift</string>
 </resources>

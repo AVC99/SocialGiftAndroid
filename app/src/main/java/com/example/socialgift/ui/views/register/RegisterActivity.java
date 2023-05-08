@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.socialgift.MainActivity;
 import com.example.socialgift.R;
 import com.example.socialgift.ui.views.login.LoginActivity;
 
@@ -35,6 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
             if(nameEditText.getText().toString().isEmpty() || surnameEditText.getText().toString().isEmpty()
                     || emailEditText.getText().toString().isEmpty() || passwordEditText.getText().toString().isEmpty()){
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }else {
                 createAccount();
             }
@@ -48,5 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createAccount() {
+
     }
 }
