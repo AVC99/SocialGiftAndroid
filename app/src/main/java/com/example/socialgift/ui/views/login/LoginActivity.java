@@ -10,11 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.socialgift.Endpoints;
+import com.example.socialgift.API.APIRequest;
+import com.example.socialgift.API.Endpoints;
+import com.example.socialgift.MainActivity;
 import com.example.socialgift.R;
 import com.example.socialgift.ui.views.register.RegisterActivity;
 
@@ -58,37 +62,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginToSocialGift(String email, String password) {
-        try {
-            //TODO: Call API and login to social gift
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest request = APIRequest.loginRequest(email, password);
 
-            JSONObject postData = new JSONObject();
-            postData.put("email", email);
-            postData.put("password", password);
+        queue.add(request);
 
-
-            //Trust the SSL certificate
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST, Endpoints.LOGIN, postData,
-                            response -> {
-                                try {
-                                    Log.d("LOGIN-TOKEN", response.getJSONObject("accessToken").toString());
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            },
-                            error -> {
-                                // TODO: Handle error
-                                Log.d("LOGIN-ERROR", error.toString());
-                                Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();
-                            });
-
-            // Access the RequestQueue through your singleton class.
-            Volley.newRequestQueue(this).add(jsonObjectRequest);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (request != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 }
