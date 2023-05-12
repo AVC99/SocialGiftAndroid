@@ -27,15 +27,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
-            <ImageView
-                android:id="@+id/add_profile_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:contentDescription="@string/app_logo_description"
-                android:src="@drawable/ic_app_logo" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/register_add_profile_image_circle_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_launcher_background"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/register_add_profile_image_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_toEndOf="@+id/register_add_profile_image_circle_image"
+                android:layout_alignBottom="@+id/register_add_profile_image_circle_image"
+                android:src="@drawable/ic_baseline_add"
+                android:layout_marginStart="-35dp"
+                android:contentDescription="@string/add_new_product"
+                />
         </RelativeLayout>
+
+
 
         <TextView
             android:layout_width="wrap_content"

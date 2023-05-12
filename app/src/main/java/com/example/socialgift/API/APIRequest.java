@@ -2,6 +2,7 @@ package com.example.socialgift.API;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 
 public class APIRequest {
 
-    public static void loginRequest(String email, String password, Context context,  VolleyCallback callback) {
+    public static void loginRequest(String email, String password, Context context, VolleyCallback callback) {
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("email", email);
@@ -52,7 +53,7 @@ public class APIRequest {
         }
     }
 
-    public static void registerRequest(String name, String lastName,String email, String password, String image, Context context, VolleyCallback callback ) {
+    public static void registerRequest(String name, String lastName, String email, String password, String image, Context context, VolleyCallback callback) {
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("name", name);
@@ -64,20 +65,8 @@ public class APIRequest {
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.REGISTER, jsonBody,
                     response -> {
                         // Handle successful response
-                        try {
-                            if(response.get("success").equals("false")){
-                                //handle error
-                                Log.d("REGISTER-RESPONSE-ERROR", response.toString());
-                                callback.onErrorResponse(new VolleyError(response.get("message").toString()));
-                            }else {
-                                //handle success
-                                Log.d("REGISTER-SUCCESS", response.toString());
-                                callback.onSuccessResponseString(response.toString());
-                            }
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                        Log.d("REGISTER-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
                     },
                     error -> {
                         // Handle error response
@@ -91,5 +80,9 @@ public class APIRequest {
         } catch (JSONException e) {
             Log.e("REGISTER-ERROR", e.toString());
         }
+    }
+
+    public static void uploadImageRequest(Uri imageUri, Context context, VolleyCallback callback){
+
     }
 }
