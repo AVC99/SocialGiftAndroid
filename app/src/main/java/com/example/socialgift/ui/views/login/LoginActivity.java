@@ -28,7 +28,6 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
-    private Button forgotPasswordButton;
     private Button registerButton;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -39,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loginButton = findViewById(R.id.login_login_button);
-        forgotPasswordButton = findViewById(R.id.login_forgot_password);
         registerButton = findViewById(R.id.login_create_account_button);
         emailEditText = findViewById(R.id.login_email);
         passwordEditText = findViewById(R.id.login_password);
@@ -58,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         });
 
-
     }
 
     private void loginToSocialGift(String email, String password) {
@@ -66,13 +63,5 @@ public class LoginActivity extends AppCompatActivity {
         JsonObjectRequest request = APIRequest.loginRequest(email, password);
 
         queue.add(request);
-
-        if (request != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-        }
     }
 }

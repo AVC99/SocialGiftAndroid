@@ -35,18 +35,7 @@
                 android:layout_marginTop="15dp"
                 android:contentDescription="@string/app_logo_description"
                 android:src="@drawable/ic_app_logo" />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_add"
-                android:layout_toEndOf="@id/add_profile_image"
-                android:layout_alignBottom="@id/add_profile_image"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/rounded_button"
-                android:contentDescription="Add Image"/>
         </RelativeLayout>
-
-
 
         <TextView
             android:layout_width="wrap_content"
