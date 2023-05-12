@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.example.socialgift.API.APIRequest;
+import com.example.socialgift.API.VolleyCallback;
 import com.example.socialgift.MainActivity;
 import com.example.socialgift.R;
 import com.example.socialgift.ui.views.login.LoginActivity;
@@ -36,11 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
             if(nameEditText.getText().toString().isEmpty() || surnameEditText.getText().toString().isEmpty()
                     || emailEditText.getText().toString().isEmpty() || passwordEditText.getText().toString().isEmpty()){
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }else {
-                createAccount();
+                createAccount(nameEditText.getText().toString(), surnameEditText.getText().toString(),
+                        emailEditText.getText().toString(), passwordEditText.getText().toString());
             }
         });
 
@@ -51,7 +53,21 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void createAccount() {
+    private void createAccount(String name, String lastName, String email, String password) {
+        APIRequest.registerRequest(name, lastName, email, password, "", this, new VolleyCallback() {
+            @Override
+            public void onSuccessResponseString(String result) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(RegisterActivity.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 }

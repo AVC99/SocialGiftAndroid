@@ -18,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialgift.API.APIRequest;
 import com.example.socialgift.API.Endpoints;
+import com.example.socialgift.API.VolleyCallback;
 import com.example.socialgift.MainActivity;
 import com.example.socialgift.R;
 import com.example.socialgift.ui.views.register.RegisterActivity;
@@ -59,9 +60,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginToSocialGift(String email, String password) {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = APIRequest.loginRequest(email, password);
+        APIRequest.loginRequest(email, password, this, new VolleyCallback() {
+            @Override
+            public void onSuccessResponseString(String result) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("accessToken", result);
+                startActivity(intent);
+                finish();
+            }
 
-        queue.add(request);
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }
