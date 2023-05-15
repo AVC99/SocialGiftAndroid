@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primary_yellow</item>
         <item name="colorSecondaryVariant">@color/primary_yellow</item>
-        <item name="colorOnSecondary">@color/quaternary</item>
+        <item name="colorOnSecondary">@color/tertiary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorTertiary</item>
         <!-- Customize your theme here. -->

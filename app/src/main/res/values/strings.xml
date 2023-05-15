@@ -26,4 +26,9 @@
     <string name="search_a_user_or_a_product">Search a user or a product</string>
     <string name="shared_preferences">SocialGiftPreferences</string>
     <string name="saved_access_token_key">savedAccessToken</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="settings">Settings</string>
+    <string name="mail">mail@mail.es</string>
+    <string name="back">Back</string>
+    <string name="message_hint">Message...</string>
 </resources>

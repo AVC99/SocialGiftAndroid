@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.socialgift.R;
@@ -29,6 +30,7 @@ public class MessagesFragment extends Fragment {
 
         binding = FragmentMessagesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         final TextView textView = new TextView(getContext());
         textView.setText("Messages Fragment");
