@@ -17,6 +17,10 @@ import com.example.socialgift.ui.views.login.LoginActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 
 public class APIRequest {
 
@@ -83,6 +87,13 @@ public class APIRequest {
     }
 
     public static void uploadImageRequest(Uri imageUri, Context context, VolleyCallback callback){
-
+        byte[] imageBytes = null;
+        try {
+            InputStream inputStream = context.getContentResolver().openInputStream(imageUri);
+            imageBytes = new byte[inputStream.available()];
+        } catch (IOException e){
+            Log.e("UPLOAD-IMAGE-ERROR", e.toString());
+        }
+       //TODO: Upload image to server
     }
 }

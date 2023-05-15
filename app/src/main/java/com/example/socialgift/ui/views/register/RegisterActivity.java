@@ -78,6 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
             if (nameEditText.getText().toString().isEmpty() || surnameEditText.getText().toString().isEmpty()
                     || emailEditText.getText().toString().isEmpty() || passwordEditText.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
             } else {
                 createAccount(nameEditText.getText().toString(), surnameEditText.getText().toString(),
                         emailEditText.getText().toString(), passwordEditText.getText().toString());
@@ -100,6 +102,17 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri imageUri) {
+        APIRequest.uploadImageRequest(imageUri, this, new VolleyCallback() {
+            @Override
+            public void onSuccessResponseString(String result) {
+                Toast.makeText(RegisterActivity.this, "Image uploaded", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(RegisterActivity.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void createAccount(String name, String lastName, String email, String password) {
