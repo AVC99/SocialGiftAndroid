@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.fragments.home.HomeFragment">
+    tools:context=".ui.fragments.search.SearchFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,22 +26,43 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:text="@string/home"
+            android:text="@string/search_menu_title"
             android:textSize="30sp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/button_background"
-            android:contentDescription="@string/notifications"
-            android:src="@drawable/ic_notifications_black_24dp"
-            app:borderWidth="0dp"
-            app:fabCustomSize="50dp" />
 
     </LinearLayout>
 
-    <include layout="@layout/post_card" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_search_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:autofillHints="text"
+            android:background="@drawable/custom_input_dialog"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/search_a_user_or_a_product"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="15sp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/search_search_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:fabCustomSize="50dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/search_a_user_or_a_product"
+            android:src="@drawable/ic_search" />
+    </LinearLayout>
+
+    <include layout="@layout/user_card"/>
 
 </LinearLayout>

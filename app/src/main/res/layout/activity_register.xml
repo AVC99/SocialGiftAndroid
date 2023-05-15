@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.views.register.RegisterActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/create_account"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/register_add_profile_image_circle_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_launcher_background"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/register_add_profile_image_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:fabCustomSize="40dp"
+                android:layout_toEndOf="@+id/register_add_profile_image_circle_image"
+                android:layout_alignBottom="@+id/register_add_profile_image_circle_image"
+                android:src="@drawable/ic_baseline_add"
+                android:layout_marginStart="-35dp"
+                android:contentDescription="@string/add_new_product"
+                />
+        </RelativeLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="25dp"
+            android:text="Profile"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/register_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/custom_input_dialog"
+            android:drawableStart="@drawable/ic_baseline_person"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/register_surname_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/custom_input_dialog"
+            android:drawableStart="@drawable/ic_baseline_person"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Surname"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/register_email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/custom_input_dialog"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/register_password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:autofillHints="password"
+            android:background="@drawable/custom_input_dialog"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/register_create_account_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/rounded_button"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/register_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/primary_yellow"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
