@@ -3,6 +3,7 @@ package com.example.socialgift.ui.views.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -43,6 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.login_email);
         passwordEditText = findViewById(R.id.login_password);
 
+
+        //check if the user has the access token stored in shared preferences
+        checkAccessToken();
+
+
         loginButton.setOnClickListener(v -> {
             if (emailEditText.getText().toString().isEmpty() || passwordEditText.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
@@ -59,12 +65,30 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void checkAccessToken() {
+        //get access token from shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
+        String accessToken = sharedPreferences.getString(getString(R.string.saved_access_token_key), null);
+
+        if(accessToken != null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
     private void loginToSocialGift(String email, String password) {
         APIRequest.loginRequest(email, password, this, new VolleyCallback() {
             @Override
             public void onSuccessResponseString(String result) {
+
+                //Save the access token in shared preferences
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(getString(R.string.saved_access_token_key), result);
+                editor.apply();
+
+                //start main activity
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("accessToken", result);
                 startActivity(intent);
                 finish();
             }
