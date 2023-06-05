@@ -21,27 +21,9 @@ import com.example.socialgift.ui.fragments.home.HomeViewModel;
 
 public class MessagesFragment extends Fragment {
 
-    private FragmentMessagesBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView( LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MessagesViewModel homeViewModel =
-                new ViewModelProvider(this).get(MessagesViewModel.class);
-
-        binding = FragmentMessagesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-
-        final TextView textView = new TextView(getContext());
-        textView.setText("Messages Fragment");
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        return inflater.inflate(R.layout.fragment_messages, container, false);
     }
 
 }

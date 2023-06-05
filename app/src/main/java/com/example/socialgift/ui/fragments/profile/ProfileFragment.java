@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.socialgift.R;
 import com.example.socialgift.databinding.FragmentProfileBinding;
 
 
@@ -19,18 +20,9 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileViewModel profileViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
-
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = new TextView(getContext());
-        textView.setText("Profile Fragment");
-        profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override

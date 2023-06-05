@@ -9,6 +9,7 @@ import com.example.socialgift.ui.fragments.messages.MessagesFragment;
 import com.example.socialgift.ui.fragments.profile.ProfileFragment;
 import com.example.socialgift.ui.fragments.search.SearchFragment;
 import com.example.socialgift.ui.views.ChatActivity;
+import com.example.socialgift.ui.views.ProductActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         addFloatingActionButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProductActivity.class);
             startActivity(intent);
         });
 
@@ -66,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-       /* Intent intent = getIntent();
-         token = intent.getStringExtra("accessToken");
-        Log.d("LOGIN-TOKEN-MAIN", token);*/
 
     }
 

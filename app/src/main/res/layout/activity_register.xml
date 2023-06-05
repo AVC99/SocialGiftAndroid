@@ -45,8 +45,7 @@
                 android:layout_alignBottom="@+id/register_add_profile_image_circle_image"
                 android:src="@drawable/ic_baseline_add"
                 android:layout_marginStart="-35dp"
-                android:contentDescription="@string/add_new_product"
-                />
+                android:contentDescription="@string/add_new_product"/>
         </RelativeLayout>
 
 

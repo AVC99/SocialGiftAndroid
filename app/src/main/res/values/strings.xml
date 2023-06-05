@@ -31,4 +31,13 @@
     <string name="mail">mail@mail.es</string>
     <string name="back">Back</string>
     <string name="message_hint">Message...</string>
+    <string name="users">Users</string>
+    <string name="products">Products</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_description_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Curabitur vitae nunc sed velit dignissim sodales ut eu. Sed id semper risus in hendrerit gravida rutrum quisque non. Orci ac auctor augue mauris augue. Et netus et malesuada fames ac. Pellentesque id nibh tortor id aliquet. Aenean et tortor at risus viverra adipiscing at in. Sollicitudin ac orci phasellus egestas tellus. Et pharetra pharetra massa massa ultricies mi quis hendrerit dolor. Luctus venenatis lectus magna fringilla urna porttitor rhoncus. Amet est placerat in egestas erat imperdiet sed. Dolor sit amet consectetur adipiscing elit. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Pharetra pharetra massa massa ultricies mi quis. Morbi enim nunc faucibus a pellentesque sit amet porttitor. Velit laoreet id donec ultrices tincidunt arcu non. Commodo quis imperdiet massa tincidunt nunc pulvinar. Accumsan tortor posuere ac ut consequat semper viverra nam. Non tellus orci ac auctor augue mauris augue. Lobortis mattis aliquam faucibus purus in.
+
+Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras sed felis eget velit aliquet sagittis id. Tristique senectus et netus et. Lectus magna fringilla urna porttitor rhoncus. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Morbi tempus iaculis urna id volutpat lacus laoreet non. Magna eget est lorem ipsum. Ut faucibus pulvinar elementum integer. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. Mi bibendum neque egestas congue.</string>
+    <string name="product_category">Product category</string>
+    <string name="product_image">Product image</string>
 </resources>
