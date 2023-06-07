@@ -66,4 +66,30 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <RelativeLayout
+        android:id="@+id/search_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="6dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_marginHorizontal="6dp"
+            android:id="@+id/profile_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/black"
+            app:tabIndicatorColor="@null"
+            app:tabMode="fixed"
+            app:tabIndicatorGravity="stretch"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicator="@drawable/tab_indicator"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/profile_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/profile_tab_layout" />
+    </RelativeLayout>
+
 </LinearLayout>
