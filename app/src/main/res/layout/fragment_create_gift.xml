@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.views.create.CreateGiftFragment">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/upload_gift"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/create_gift_add_image_circle_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="1dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/register_add_profile_image_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignBottom="@+id/create_gift_add_image_circle_image"
+                    android:layout_marginStart="-35dp"
+                    android:layout_toEndOf="@+id/create_gift_add_image_circle_image"
+                    android:contentDescription="@string/add_new_product"
+                    android:src="@drawable/ic_baseline_add"
+                    app:fabCustomSize="40dp" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="25dp"
+                android:text="@string/gift_details"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/create_gift_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/custom_input_dialog"
+                android:drawableStart="@drawable/ic_badge"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/item_name"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/create_gift_description_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="15dp"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/custom_input_dialog"
+                android:drawableStart="@drawable/ic_description"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/description"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/create_gift_price_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:autofillHints="numbers"
+                android:background="@drawable/custom_input_dialog"
+                android:drawableStart="@drawable/ic_price"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/price"
+                android:inputType="number"
+                android:padding="15dp"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/create_gift_category_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:autofillHints="text"
+                android:background="@drawable/custom_input_dialog"
+                android:drawableStart="@drawable/ic_category"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/category"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textSize="20sp" />
+
+
+            <Button
+                android:id="@+id/create_gift_create_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/rounded_button"
+                android:text="@string/upload_gift"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+
+</ScrollView>

@@ -37,6 +37,7 @@ public class SearchFragment extends Fragment {
         SearchViewPagerAdapter viewPagerAdapter = new SearchViewPagerAdapter(fm, getLifecycle());
         viewPager = requireActivity().findViewById(R.id.search_view_pager);
         tabLayout = requireActivity().findViewById(R.id.search_tab_layout);
+        viewPager.setSaveEnabled(false);
          viewPager.setAdapter(viewPagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager,

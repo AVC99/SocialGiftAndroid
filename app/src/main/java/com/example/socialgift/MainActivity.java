@@ -2,28 +2,21 @@ package com.example.socialgift;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.socialgift.ui.fragments.home.HomeFragment;
 import com.example.socialgift.ui.fragments.messages.MessagesFragment;
 import com.example.socialgift.ui.fragments.profile.ProfileFragment;
 import com.example.socialgift.ui.fragments.search.SearchFragment;
-import com.example.socialgift.ui.views.ChatActivity;
-import com.example.socialgift.ui.views.ProductActivity;
+import com.example.socialgift.ui.views.create.CreateSelectorActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.socialgift.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+
     private String token;
 
     private BottomNavigationView bottomNavigationView;
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         addFloatingActionButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+            Intent intent = new Intent(MainActivity.this, CreateSelectorActivity.class);
             startActivity(intent);
         });
 

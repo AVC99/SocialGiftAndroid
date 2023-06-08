@@ -39,6 +39,7 @@ public class ProfileFragment extends Fragment {
         ProfileViewPagerAdapter viewPagerAdapter = new ProfileViewPagerAdapter(fm, getLifecycle());
         viewPager = requireActivity().findViewById(R.id.profile_view_pager);
         tabLayout = requireActivity().findViewById(R.id.profile_tab_layout);
+        viewPager.setSaveEnabled(false);
         viewPager.setAdapter(viewPagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager,
