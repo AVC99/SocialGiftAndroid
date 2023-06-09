@@ -30,6 +30,7 @@ public class ProfileFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private FloatingActionButton editProfileButton;
+    private FloatingActionButton optionsProfileButton;
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -45,10 +46,16 @@ public class ProfileFragment extends Fragment {
         viewPager = requireActivity().findViewById(R.id.profile_view_pager);
         tabLayout = requireActivity().findViewById(R.id.profile_tab_layout);
         editProfileButton = requireActivity().findViewById(R.id.profile_edit_fab);
+        optionsProfileButton = requireActivity().findViewById(R.id.profile_settings_fab);
 
         //Set up the edit profile button
         editProfileButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+            startActivity(intent);
+        });
+        //Set up the options button
+        optionsProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OptionsActivity.class);
             startActivity(intent);
         });
 

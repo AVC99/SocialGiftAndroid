@@ -59,4 +59,7 @@ Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras
     <string name="email_icon">Email icon</string>
     <string name="modify_photo">Modify photo</string>
     <string name="profile_details">Profile details</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete account</string>
+    <string name="options">Options</string>
 </resources>
