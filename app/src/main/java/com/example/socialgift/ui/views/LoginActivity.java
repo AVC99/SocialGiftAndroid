@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         String accessToken = sharedPreferences.getString(getString(R.string.saved_access_token_key), null);
         int userId = sharedPreferences.getInt(getString(R.string.saved_user_id_key), -1);
 
-        if(accessToken != null || userId != -1){
+        if (accessToken != null || userId != -1) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -67,19 +67,33 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginToSocialGift(String email, String password) {
-        APIRequest.loginRequest(email, password, this, new VolleyCallback() {
+
+        APIRequest.loginRequest(email, password,this, new VolleyCallback() {
             @Override
             public void onSuccessResponseString(String result) {
-
                 //Save the access token in shared preferences
                 SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.saved_access_token_key), result);
-                //TODO: get user id from the response and save it in shared preferences
-
-
                 editor.apply();
+                getUserID(email,result, editor);
+            }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
+    }
+
+    private void getUserID(String email,String token,  SharedPreferences.Editor editor) {
+        APIRequest apiRequest = new APIRequest(this);
+
+        apiRequest.getUserId(email,token, new VolleyCallback() {
+            @Override
+            public void onSuccessResponseString(String result) {
+                editor.putInt(getString(R.string.saved_user_id_key), Integer.parseInt(result));
+                editor.apply();
                 //start main activity
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -91,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 }
