@@ -7,14 +7,14 @@ import android.widget.ImageView;
 
 import com.example.socialgift.R;
 
-public class ChatActivity extends AppCompatActivity {
+public class NotificationsActivity extends AppCompatActivity {
 
-    private ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-        backButton = findViewById(R.id.chat_back_button_image_view);
+        setContentView(R.layout.activity_notifications);
+
+        ImageView backButton = findViewById(R.id.notifications_back_button);
 
         backButton.setOnClickListener(v -> {
             finish();

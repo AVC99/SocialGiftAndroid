@@ -73,7 +73,7 @@
             android:layout_marginHorizontal="6dp"
             android:id="@+id/search_tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             app:tabGravity="fill"
             app:tabSelectedTextColor="@color/black"
             app:tabIndicatorColor="@null"

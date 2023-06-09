@@ -1,28 +1,24 @@
-package com.example.socialgift.ui.views.register;
+package com.example.socialgift.ui.views;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.VolleyError;
 import com.example.socialgift.API.APIRequest;
 import com.example.socialgift.API.VolleyCallback;
 import com.example.socialgift.MainActivity;
 import com.example.socialgift.R;
-import com.example.socialgift.ui.views.login.LoginActivity;
 
 import java.io.IOException;
 

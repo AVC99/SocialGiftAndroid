@@ -49,4 +49,14 @@ Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras
     <string name="gift_details">Gift Details</string>
     <string name="price">Price</string>
     <string name="category">Category</string>
+    <string name="start_new_chat">Start new chat</string>
+    <string name="search_for_a_friend">Search for a friend</string>
+    <string name="go_back">Go back</string>
+    <string name="mail_email_es">mail@email.es</string>
+    <string name="accept_request">Accept request</string>
+    <string name="decline_request">Decline request</string>
+    <string name="user_icon">User icon</string>
+    <string name="email_icon">Email icon</string>
+    <string name="modify_photo">Modify photo</string>
+    <string name="profile_details">Profile details</string>
 </resources>
