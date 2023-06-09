@@ -14,23 +14,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialGift"
         tools:targetApi="31">
-
-
         <activity
-            android:name=".ui.views.login.LoginActivity"
+            android:name=".ui.fragments.profile.OptionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fragments.profile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.create.CreateSelectorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.ProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fragments.messages.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.views.register.RegisterActivity"
+            android:name=".ui.views.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

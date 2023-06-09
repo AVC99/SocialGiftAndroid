@@ -2,25 +2,21 @@ package com.example.socialgift;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.socialgift.ui.fragments.home.HomeFragment;
 import com.example.socialgift.ui.fragments.messages.MessagesFragment;
 import com.example.socialgift.ui.fragments.profile.ProfileFragment;
 import com.example.socialgift.ui.fragments.search.SearchFragment;
+import com.example.socialgift.ui.views.create.CreateSelectorActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.socialgift.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+
     private String token;
 
     private BottomNavigationView bottomNavigationView;
@@ -29,12 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
+    private FloatingActionButton addFloatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.nav_view);
+        addFloatingActionButton = findViewById(R.id.main_activity_fab);
+
+
+        addFloatingActionButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CreateSelectorActivity.class);
+            startActivity(intent);
+        });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, homeFragment).commit();
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -55,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-       /* Intent intent = getIntent();
-         token = intent.getStringExtra("accessToken");
-        Log.d("LOGIN-TOKEN-MAIN", token);*/
 
     }
 

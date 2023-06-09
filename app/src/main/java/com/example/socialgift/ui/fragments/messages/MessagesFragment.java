@@ -1,8 +1,9 @@
 package com.example.socialgift.ui.fragments.messages;
 
-import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,35 +12,30 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 
 import com.example.socialgift.R;
-import com.example.socialgift.databinding.FragmentHomeBinding;
-import com.example.socialgift.databinding.FragmentMessagesBinding;
-import com.example.socialgift.ui.fragments.home.HomeViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 public class MessagesFragment extends Fragment {
+    private FloatingActionButton newChatButton;
 
-    private FragmentMessagesBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView( LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MessagesViewModel homeViewModel =
-                new ViewModelProvider(this).get(MessagesViewModel.class);
 
-        binding = FragmentMessagesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = new TextView(getContext());
-        textView.setText("Messages Fragment");
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return inflater.inflate(R.layout.fragment_messages, container, false);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+
+        newChatButton = getActivity().findViewById(R.id.messages_new_chat_button);
+        newChatButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent);
+        });
+    }
 }

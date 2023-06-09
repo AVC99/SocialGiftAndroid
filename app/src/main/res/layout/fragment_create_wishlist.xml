@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.views.create.CreateWishlistFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="25dp"
+        android:text="@string/wishlist_details"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/create_wishlist_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/custom_input_dialog"
+        android:drawableStart="@drawable/ic_badge"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/item_name"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/create_wishlist_description_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="15dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/custom_input_dialog"
+        android:drawableStart="@drawable/ic_description"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/description"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/create_wishlist_date_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/custom_input_dialog"
+        android:drawableStart="@drawable/ic_calendar"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/dd_mm_yyyy"
+        android:padding="15dp"
+        android:textSize="20sp"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/create_wishlist_create_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/create_wishlist"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

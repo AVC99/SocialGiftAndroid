@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layout_marginBottom="?android:attr/actionBarSize"
     tools:context=".ui.fragments.search.SearchFragment">
 
     <LinearLayout
@@ -56,13 +57,36 @@
             android:id="@+id/search_search_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:fabCustomSize="50dp"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/search_a_user_or_a_product"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_search"
+            app:fabCustomSize="50dp" />
     </LinearLayout>
 
-    <include layout="@layout/user_card"/>
+    <RelativeLayout
+        android:id="@+id/search_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_marginHorizontal="6dp"
+            android:id="@+id/search_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/black"
+            app:tabIndicatorColor="@null"
+            app:tabMode="fixed"
+            app:tabIndicatorGravity="stretch"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicator="@drawable/tab_indicator"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/search_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/search_tab_layout" />
+    </RelativeLayout>
 
 </LinearLayout>

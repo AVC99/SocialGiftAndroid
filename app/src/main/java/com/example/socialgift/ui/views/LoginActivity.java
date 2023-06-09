@@ -1,31 +1,19 @@
-package com.example.socialgift.ui.views.login;
+package com.example.socialgift.ui.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.socialgift.API.APIRequest;
-import com.example.socialgift.API.Endpoints;
 import com.example.socialgift.API.VolleyCallback;
 import com.example.socialgift.MainActivity;
 import com.example.socialgift.R;
-import com.example.socialgift.ui.views.register.RegisterActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -69,10 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         //get access token from shared preferences
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
         String accessToken = sharedPreferences.getString(getString(R.string.saved_access_token_key), null);
+        int userId = sharedPreferences.getInt(getString(R.string.saved_user_id_key), -1);
 
-        if(accessToken != null){
+        if(accessToken != null || userId != -1){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -85,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.saved_access_token_key), result);
+                //TODO: get user id from the response and save it in shared preferences
+
+
                 editor.apply();
 
                 //start main activity

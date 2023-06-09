@@ -16,10 +16,10 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_card_profile_image"
+                android:id="@+id/notification_card_profile_image"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_launcher_background"
                 app:civ_border_color="#FF000000"
@@ -40,6 +40,7 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:contentDescription="@string/user_icon"
                         android:src="@drawable/ic_baseline_person_yellow" />
 
                     <TextView
@@ -59,26 +60,48 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:contentDescription="@string/email_icon"
                         android:src="@drawable/ic_mail_yellow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="5dp"
-                        android:text="mail@email.es"
+                        android:text="@string/mail_email_es"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/add_new_product"
-                android:scaleType="center"
-                android:src="@drawable/ic_baseline_add"
-                app:fabCustomSize="70dp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/notification_card_accept_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/accept_request"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_close"
+                    app:fabCustomSize="50dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="6dp"
+                    android:contentDescription="@string/decline_request"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_check"
+                    app:fabCustomSize="50dp" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

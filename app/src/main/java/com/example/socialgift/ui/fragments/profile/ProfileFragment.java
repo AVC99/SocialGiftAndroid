@@ -1,43 +1,73 @@
 package com.example.socialgift.ui.fragments.profile;
 
-import androidx.lifecycle.ViewModelProvider;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.socialgift.databinding.FragmentProfileBinding;
+
+import com.example.socialgift.R;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class ProfileFragment extends Fragment {
 
-    private FragmentProfileBinding binding;
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager;
+    private FloatingActionButton editProfileButton;
+    private FloatingActionButton optionsProfileButton;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileViewModel profileViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
-
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = new TextView(getContext());
-        textView.setText("Profile Fragment");
-        profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        //Get all the views
+        FragmentManager fm = this.getChildFragmentManager();
+        ProfileViewPagerAdapter viewPagerAdapter = new ProfileViewPagerAdapter(fm, getLifecycle());
+        viewPager = requireActivity().findViewById(R.id.profile_view_pager);
+        tabLayout = requireActivity().findViewById(R.id.profile_tab_layout);
+        editProfileButton = requireActivity().findViewById(R.id.profile_edit_fab);
+        optionsProfileButton = requireActivity().findViewById(R.id.profile_settings_fab);
+
+        //Set up the edit profile button
+        editProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+            startActivity(intent);
+        });
+        //Set up the options button
+        optionsProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OptionsActivity.class);
+            startActivity(intent);
+        });
+
+        //Set up the tab bar and the tabs in the tab bar
+        viewPager.setSaveEnabled(false);
+        viewPager.setAdapter(viewPagerAdapter);
+
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(position == 0 ? "Wishlists" : "Friends")
+        ).attach();
+
     }
+
 
 }
 
