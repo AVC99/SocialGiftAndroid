@@ -1,4 +1,4 @@
-package com.example.socialgift.ui.views;
+package com.example.socialgift.ui.fragments.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 

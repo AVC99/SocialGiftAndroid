@@ -57,10 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         //get access token from shared preferences
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
         String accessToken = sharedPreferences.getString(getString(R.string.saved_access_token_key), null);
+        int userId = sharedPreferences.getInt(getString(R.string.saved_user_id_key), -1);
 
-        if(accessToken != null){
+        if(accessToken != null || userId != -1){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -73,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.saved_access_token_key), result);
+                //TODO: get user id from the response and save it in shared preferences
+
+
                 editor.apply();
 
                 //start main activity

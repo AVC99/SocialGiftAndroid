@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 
 import com.example.socialgift.R;
 
-import com.example.socialgift.ui.views.EditProfileActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
