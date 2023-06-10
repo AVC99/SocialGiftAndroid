@@ -63,4 +63,7 @@ Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras
     <string name="delete_account">Delete account</string>
     <string name="options">Options</string>
     <string name="saved_user_id_key">savedUserID</string>
+    <string name="last_name">Last Name</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
 </resources>

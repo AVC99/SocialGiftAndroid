@@ -67,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginToSocialGift(String email, String password) {
-
         APIRequest.loginRequest(email, password,this, new VolleyCallback() {
             @Override
             public void onSuccessResponseString(String result) {
@@ -88,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getUserID(String email,String token,  SharedPreferences.Editor editor) {
         APIRequest apiRequest = new APIRequest(this);
-
         apiRequest.getUserId(email,token, new VolleyCallback() {
             @Override
             public void onSuccessResponseString(String result) {

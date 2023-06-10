@@ -6,17 +6,15 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialgift.R;
+import com.example.socialgift.model.User;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,9 +30,7 @@ public class APIRequest {
     private Context context;
 
     public APIRequest(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        this.token = sharedPreferences.getString(context.getString(R.string.saved_access_token_key),  null);
-        //this.token = context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE).getString(context.getString(R.string.saved_access_token_key), null);
+        this.token = context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE).getString(context.getString(R.string.saved_access_token_key), null);
         this.userId = context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE).getInt(context.getString(R.string.saved_user_id_key), -1);
         this.context = context;
     }
@@ -161,6 +157,45 @@ public class APIRequest {
         }
 
     }
+    public void getUser(VolleyCallbackUser volleyCallback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Endpoints.SEARCH_USER_BY_ID +this.userId, null,
+                    response -> {
+                        // Handle successful response
+                        try {
+                            int id = response.getInt("id");
+                            String name = response.getString("name");
+                            String lastName = response.getString("last_name");
+                            String email = response.getString("email");
+                            String image = response.getString("image");
+
+                            Log.d("GET-USER-SUCCESS", response.toString());
+                           volleyCallback.onSuccessResponse(new User(id,name,lastName,email,image));
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-USER-ERROR", error.toString());
+                        volleyCallback.onErrorResponse(error);
+                    }){
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GET-USER-ID-ERROR", e.toString());
+        }
+    }
 
     public static void uploadImageRequest(Uri imageUri, Context context, VolleyCallback callback) {
         byte[] imageBytes = null;
@@ -174,5 +209,57 @@ public class APIRequest {
     }
 
 
+    public void updateProfileRequest(String name, String lastName, String email, String password, VolleyCallbackUser volleyCallback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+          JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, Endpoints.USERS, null,
+                    response -> {
+                        // Handle successful response
+                        try {
+                            int id = response.getInt("id");
+                            String name1 = response.getString("name");
+                            String lastName1 = response.getString("last_name");
+                            String email1 = response.getString("email");
+                            String image = response.getString("image");
 
+                            Log.d("UPDATE-PROFILE-SUCCESS", response.toString());
+                            volleyCallback.onSuccessResponse(new User(id,name1,lastName1,email1,image));
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("UPDATE-PROFILE-ERROR", error.toString());
+                        volleyCallback.onErrorResponse(error);
+                    }){
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+                @Override
+                public byte[] getBody() {
+                    JSONObject jsonBody = new JSONObject();
+                    try {
+                        jsonBody.put("name", name);
+                        jsonBody.put("last_name", lastName);
+                        jsonBody.put("email", email);
+                        jsonBody.put("password", password);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return jsonBody.toString().getBytes();
+                }
+            };
+
+            queue.add(request);
+
+        }catch (Exception e) {
+            Log.e("UPDATE-PROFILE-ERROR", e.toString());
+        }
+    }
 }
