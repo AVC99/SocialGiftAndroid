@@ -48,7 +48,6 @@ public class ProfileFriendsFragment extends Fragment {
             @Override
             public void onSuccessResponse(ArrayList<User> result) {
                 friends = result;
-                Log.d("friends", friends.toString());
                 friendAdapter = new FriendAdapter(friends, getContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

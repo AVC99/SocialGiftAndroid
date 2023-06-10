@@ -21,7 +21,6 @@ import com.example.socialgift.API.APIRequest;
 import com.example.socialgift.API.VolleyCallback;
 import com.example.socialgift.R;
 import com.example.socialgift.model.Post;
-import com.example.socialgift.model.Product;
 import com.example.socialgift.ui.views.ProductActivity;
 import com.example.socialgift.ui.views.wishlistselection.WishlistSelectionActivity;
 
