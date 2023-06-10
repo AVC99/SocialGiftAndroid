@@ -56,6 +56,8 @@ public class ProfileFriendsFragment extends Fragment {
                 Log.d("friends", friends.toString());
                 friendAdapter = new FriendAdapter(friends, getContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                linearLayoutManager.canScrollVertically();
                 friendsRecyclerView.setLayoutManager(linearLayoutManager);
                 friendsRecyclerView.setAdapter(friendAdapter);
             }
