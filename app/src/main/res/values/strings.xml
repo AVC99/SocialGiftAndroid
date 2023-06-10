@@ -66,4 +66,5 @@ Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras
     <string name="last_name">Last Name</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
+    <string name="remove_friend">Remove friend</string>
 </resources>

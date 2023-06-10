@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class APIRequest {
         this.context = context;
     }
 
-    public static void loginRequest(String email, String password,Context context,  VolleyCallback callback) {
+    public static void loginRequest(String email, String password, Context context, VolleyCallback callback) {
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("email", email);
@@ -121,14 +122,14 @@ public class APIRequest {
         }
     }
 
-    public void getUserId(String email,String token, VolleyCallback volleyCallback) {
+    public void getUserId(String email, String token, VolleyCallback volleyCallback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.SEARCH_USER + email, null,
                     response -> {
                         // Handle successful response
                         try {
-                            if (response.length()>0){
+                            if (response.length() > 0) {
                                 int userId = response.getJSONObject(0).getInt("id");
                                 Log.d("GET-USER-ID-SUCCESS", String.valueOf(userId));
                                 volleyCallback.onSuccessResponseString(String.valueOf(userId));
@@ -141,7 +142,7 @@ public class APIRequest {
                         // Handle error response
                         Log.e("GET-USER-ID-ERROR", error.toString());
                         volleyCallback.onErrorResponse(error);
-                    }){
+                    }) {
                 @Override
                 public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
@@ -157,10 +158,11 @@ public class APIRequest {
         }
 
     }
+
     public void getUser(VolleyCallbackUser volleyCallback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Endpoints.SEARCH_USER_BY_ID +this.userId, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Endpoints.SEARCH_USER_BY_ID + this.userId, null,
                     response -> {
                         // Handle successful response
                         try {
@@ -171,7 +173,7 @@ public class APIRequest {
                             String image = response.getString("image");
 
                             Log.d("GET-USER-SUCCESS", response.toString());
-                           volleyCallback.onSuccessResponse(new User(id,name,lastName,email,image));
+                            volleyCallback.onSuccessResponse(new User(id, name, lastName, email, image));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -181,7 +183,7 @@ public class APIRequest {
                         // Handle error response
                         Log.e("GET-USER-ERROR", error.toString());
                         volleyCallback.onErrorResponse(error);
-                    }){
+                    }) {
                 @Override
                 public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
@@ -212,7 +214,7 @@ public class APIRequest {
     public void updateProfileRequest(String name, String lastName, String email, String password, VolleyCallbackUser volleyCallback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-          JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, Endpoints.USERS, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, Endpoints.USERS, null,
                     response -> {
                         // Handle successful response
                         try {
@@ -223,7 +225,7 @@ public class APIRequest {
                             String image = response.getString("image");
 
                             Log.d("UPDATE-PROFILE-SUCCESS", response.toString());
-                            volleyCallback.onSuccessResponse(new User(id,name1,lastName1,email1,image));
+                            volleyCallback.onSuccessResponse(new User(id, name1, lastName1, email1, image));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -233,7 +235,7 @@ public class APIRequest {
                         // Handle error response
                         Log.e("UPDATE-PROFILE-ERROR", error.toString());
                         volleyCallback.onErrorResponse(error);
-                    }){
+                    }) {
                 @Override
                 public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
@@ -241,6 +243,7 @@ public class APIRequest {
                     params.put("Content-Type", "application/json");
                     return params;
                 }
+
                 @Override
                 public byte[] getBody() {
                     JSONObject jsonBody = new JSONObject();
@@ -258,8 +261,73 @@ public class APIRequest {
 
             queue.add(request);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.e("UPDATE-PROFILE-ERROR", e.toString());
+        }
+    }
+
+    public void removeFriend(int id, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.FRIENDS + id, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("REMOVE-FRIEND-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("REMOVE-FRIEND-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("REMOVE-FRIEND-ERROR", e.toString());
+        }
+    }
+
+    public void getFriends(VolleyCallbackUserArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.FRIENDS, null,
+                    response -> {
+                        // Handle successful response
+                        if (response.length() > 0) {
+                            Log.d("GET-FRIEND-SUCCESS", response.toString());
+                            ArrayList<User> friends = new ArrayList<>();
+                            friends = User.parseJsonArray(response);
+                            callback.onSuccessResponse(friends);
+
+                        } else {
+                            Log.d("GET-FRIEND-SUCCESS", "No friends");
+                            callback.onSuccessResponse(null);
+                        }
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-FRIEND-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("REMOVE-FRIEND-ERROR", e.toString());
         }
     }
 }

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.profile.ProfileFriendsFragment">
+    tools:context=".ui.fragments.profile.friends.ProfileFriendsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_friends_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@color/light_blue_400"
-        android:text="@string/product_description_lorem" />
+        android:layout_margin="6dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/friend_card"/>
 
-</ScrollView>
+</LinearLayout>
