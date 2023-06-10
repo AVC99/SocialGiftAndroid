@@ -1,4 +1,4 @@
-package com.example.socialgift.ui.fragments.profile;
+package com.example.socialgift.ui.fragments.profile.wishlists;
 
 import android.os.Bundle;
 

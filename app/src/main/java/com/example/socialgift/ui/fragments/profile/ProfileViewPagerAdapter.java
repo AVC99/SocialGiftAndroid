@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.socialgift.ui.fragments.profile.friends.ProfileFriendsFragment;
+import com.example.socialgift.ui.fragments.profile.wishlists.ProfileWishlistFragment;
 
 public class ProfileViewPagerAdapter extends FragmentStateAdapter {
 

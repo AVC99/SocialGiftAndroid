@@ -12,7 +12,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialgift.R;
+import com.example.socialgift.model.Product;
 import com.example.socialgift.model.User;
+import com.example.socialgift.model.Wishlist;
 
 
 import org.json.JSONException;
@@ -328,6 +330,150 @@ public class APIRequest {
             queue.add(request);
         } catch (Exception e) {
             Log.e("REMOVE-FRIEND-ERROR", e.toString());
+        }
+    }
+
+    public void getUserWishlists(int id, VolleyCallbackWishlistArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.USERS + id + "/wishlists", null,
+                    response -> {
+                        // Handle successful response
+                        if (response.length() > 0) {
+                            Log.d("GET-WISHLIST-SUCCESS", response.toString());
+                            ArrayList<Wishlist> wishlists = Wishlist.parseJSONArray(response);
+                            callback.onSuccessResponse(wishlists);
+
+                        } else {
+                            Log.d("GET-WISHLIST-SUCCESS", "No wishlists");
+                            callback.onSuccessResponse(null);
+                        }
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-WISHLIST-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GET-WISHLIST-ERROR", e.toString());
+        }
+    }
+
+    public void getGiftInformation(String url, VolleyCallbackProduct volleyCallbackProduct) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                    response -> {
+                        try {
+                            // Handle successful response
+                            Log.d("GET-GIFT-SUCCESS", response.toString());
+                            Product product = new Product(
+                                    response.getInt("id"),
+                                    response.getString("name"),
+                                    response.getString("description"),
+                                    response.getString("photo"),
+                                    response.getDouble("price")
+                            );
+                            volleyCallbackProduct.onSuccessResponse(product);
+                        } catch (JSONException e) {
+                            Log.e("GET-GIFT-ERROR", e.toString());
+                        }
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-GIFT-ERROR", error.toString());
+                        volleyCallbackProduct.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GET-GIFT-ERROR", e.toString());
+        }
+    }
+
+    public void giftProduct(int id, VolleyCallback volleyCallback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.GIFT + id + "/book", null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("GIFT-SUCCESS", response.toString());
+                        volleyCallback.onSuccessResponseString(response.toString());
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GIFT-ERROR", error.toString());
+                        volleyCallback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GIFT-ERROR", e.toString());
+        }
+
+    }
+
+    public void saveProductToWishlist(int wishlistId,  String productUrl, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.GIFT, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("SAVED-TO-WISHLIST-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("SAVED-TO-WISHLIST-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+
+                @Override
+                public byte[] getBody() {
+                    JSONObject jsonBody = new JSONObject();
+                    try {
+                        jsonBody.put("wishlist_id", wishlistId);
+                        jsonBody.put("product_url", productUrl);
+                        jsonBody.put("priority", 1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return jsonBody.toString().getBytes();
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("SAVE-PRODUCT-ERROR", e.toString());
         }
     }
 }

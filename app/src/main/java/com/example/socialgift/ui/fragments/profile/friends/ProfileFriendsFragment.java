@@ -39,12 +39,7 @@ public class ProfileFriendsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         friendsRecyclerView = view.findViewById(R.id.profile_friends_recycler_view);
-
-
         getFriends();
-
-
-
     }
 
     private void getFriends() {

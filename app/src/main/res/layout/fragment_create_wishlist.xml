@@ -27,7 +27,7 @@
         android:drawableStart="@drawable/ic_badge"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="@string/item_name"
+        android:hint="@string/wishlist_name"
         android:inputType="textEmailAddress"
         android:padding="15dp"
         android:textSize="20sp" />
