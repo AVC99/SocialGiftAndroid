@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -652,6 +653,70 @@ public class APIRequest {
             queue.add(request);
         } catch (Exception e) {
             Log.e("SEARCH-PRODUCT-ERROR", e.toString());
+        }
+    }
+
+    public void getNotifications(VolleyCallbackUserArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.FRIENDS + "requests", null,
+                    response -> {
+                        // Handle successful response
+                        ArrayList<User> users = new ArrayList<>();
+                        if (response.length() > 0) {
+                            Log.d("GET-NOTIFICATIONS-SUCCESS", response.toString());
+                            users = User.parseJsonArray(response);
+                            callback.onSuccessResponse(users);
+                        }
+                        callback.onSuccessResponse(users);
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-NOTIFICATIONS-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + token);
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GET-NOTIFICATIONS-ERROR", e.toString());
+        }
+
+    }
+
+    public void acceptFriendRequest(int id, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, Endpoints.FRIENDS + id, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("ACCEPT-FRIEND-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("ACCEPT-FRIEND-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + token);
+                    return params;
+                }
+            };
+            queue.add(request);
+
+        } catch (Exception e) {
+            Log.e("ACCEPT-FRIEND-ERROR", e.toString());
         }
     }
 }

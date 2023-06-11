@@ -2,7 +2,6 @@ package com.example.socialgift.ui.fragments.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import com.example.socialgift.model.Post;
 import com.example.socialgift.model.Product;
 import com.example.socialgift.model.User;
 import com.example.socialgift.model.Wishlist;
-import com.example.socialgift.ui.views.NotificationsActivity;
+import com.example.socialgift.ui.views.notifications.NotificationsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
