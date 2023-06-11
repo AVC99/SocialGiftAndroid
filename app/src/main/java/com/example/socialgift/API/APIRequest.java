@@ -719,4 +719,47 @@ public class APIRequest {
             Log.e("ACCEPT-FRIEND-ERROR", e.toString());
         }
     }
+
+    public void createWishlist(String name, String description, String date, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.WISHLIST, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("CREATE-WISHLIST-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("CREATE-WISHLIST-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + token);
+                    return params;
+                }
+
+                @Override
+                public byte[] getBody() {
+                    JSONObject body = new JSONObject();
+                    try {
+                        body.put("name", name);
+                        body.put("description", description);
+                        body.put("end_date", date);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return body.toString().getBytes();
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("CREATE-WISHLIST-ERROR", e.toString());
+        }
+
+    }
 }
