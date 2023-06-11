@@ -63,7 +63,6 @@ public class CreateWishlistFragment extends Fragment {
 
                             @Override
                             public void onSuccessResponseString(String result) {
-                                Toast.makeText(getContext(), "Wishlist created", Toast.LENGTH_SHORT).show();
                                 requireActivity().finish();
                             }
 
