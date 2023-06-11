@@ -19,6 +19,7 @@ import com.example.socialgift.model.Wishlist;
 import com.google.gson.Gson;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,6 +101,45 @@ public class APIRequest {
         } catch (JSONException e) {
             Log.e("REGISTER-ERROR", e.toString());
         }
+    }
+
+    public void addFriend(int id, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, Endpoints.FRIENDS + id, null,
+                    response -> {
+                        // Handle successful response
+                        try {
+                            if (response.length() > 0) {
+                                int userId = response.getJSONObject(0).getInt("id");
+                                Log.d("GET-USER-ID-SUCCESS", String.valueOf(userId));
+                                callback.onSuccessResponseString(String.valueOf(userId));
+                            } else {
+                                Log.d("GET-USER-ID-SUCCESS", "No user found");
+                                callback.onSuccessResponseString(null);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-USER-ID-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Authorization", "Bearer " + token);
+                    return headers;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("ADD-FRIEND-ERROR", e.toString());
+        }
+
+
     }
 
     public void deleteAccount(Context context, VolleyCallback callback) {
@@ -482,7 +522,7 @@ public class APIRequest {
     public void deleteProductFromWishlist(int id, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.GIFT +id, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.GIFT + id, null,
                     response -> {
                         // Handle successful response
                         Log.d("DELETE-PRODUCT-SUCCESS", response.toString());
@@ -511,7 +551,7 @@ public class APIRequest {
     public void deleteWishlist(int id, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.WISHLIST +id, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.WISHLIST + id, null,
                     response -> {
                         // Handle successful response
                         Log.d("DELETE-WISHLIST-SUCCESS", response.toString());
@@ -536,4 +576,47 @@ public class APIRequest {
         }
     }
 
+    public void searchUsers(String toString, VolleyCallbackUserArray volleyCallback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try{
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.SEARCH_USER + toString, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("SEARCH-USER-SUCCESS", response.toString());
+                        ArrayList<User> users = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject user = response.getJSONObject(i);
+                                users.add(new User(
+                                        user.getInt("id"),
+                                        user.getString("name"),
+                                        user.getString("last_name"),
+                                        user.getString("email"),
+                                        user.getString("image")
+                                ));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                        volleyCallback.onSuccessResponse(users);
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("SEARCH-USER-ERROR", error.toString());
+                        volleyCallback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        }catch (Exception e) {
+            Log.e("SEARCH-USER-ERROR", e.toString());
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.socialgift.ui.fragments.search;
+package com.example.socialgift.ui.fragments.search.gifts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,4 +17,6 @@ public class SearchGiftsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_search_gifts, container, false);
     }
 
+    public void search(String toString) {
+    }
 }

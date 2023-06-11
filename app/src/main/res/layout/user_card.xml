@@ -2,8 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginHorizontal="5dp"
+    android:layout_height="wrap_content"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="20dp">
 
     <LinearLayout
@@ -32,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -40,10 +41,11 @@
                     android:src="@drawable/ic_baseline_person_yellow" />
 
                 <TextView
+                    android:id="@+id/user_card_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="5dp"
-                    android:text="@string/username"
+                    android:text="q"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -51,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -59,24 +61,24 @@
                     android:src="@drawable/ic_mail_yellow" />
 
                 <TextView
+                    android:id="@+id/user_card_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="5dp"
-                    android:text="mail@email.es"
+                    android:text="q"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/user_card_fab"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:contentDescription="@string/add_new_product"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_add"
+            android:src="@drawable/ic_friend_add"
             app:fabCustomSize="60dp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
-
