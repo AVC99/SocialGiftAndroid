@@ -44,6 +44,7 @@
                         android:src="@drawable/ic_baseline_person_yellow" />
 
                     <TextView
+                        android:id="@+id/notification_card_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="5dp"
@@ -64,6 +65,7 @@
                         android:src="@drawable/ic_mail_yellow" />
 
                     <TextView
+                        android:id="@+id/notification_card_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="5dp"
@@ -84,20 +86,23 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/accept_request"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_close"
-                    app:fabCustomSize="50dp" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
                     android:layout_marginStart="6dp"
                     android:contentDescription="@string/decline_request"
                     android:scaleType="center"
                     android:src="@drawable/ic_check"
                     app:fabCustomSize="50dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/notification_card_decline_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/accept_request"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_close"
+                    app:fabCustomSize="50dp" />
+
+
 
             </LinearLayout>
 

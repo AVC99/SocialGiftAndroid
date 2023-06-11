@@ -27,7 +27,7 @@
             android:name=".ui.fragments.profile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.views.NotificationsActivity"
+            android:name=".ui.views.notifications.NotificationsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.views.create.CreateSelectorActivity"
