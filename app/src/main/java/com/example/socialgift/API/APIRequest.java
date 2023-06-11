@@ -19,6 +19,7 @@ import com.example.socialgift.model.Wishlist;
 import com.google.gson.Gson;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,6 +101,37 @@ public class APIRequest {
         } catch (JSONException e) {
             Log.e("REGISTER-ERROR", e.toString());
         }
+    }
+
+    public void addFriend(int id, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.FRIENDS + id, null,
+                    response -> {
+                        // Handle successful response
+
+                        Log.d("ADD-FRIEND-SUCCESS", response.toString());
+
+                        callback.onSuccessResponseString(String.valueOf(userId));
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("ADD-FRIEND-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Authorization", "Bearer " + token);
+                    return headers;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("ADD-FRIEND-ERROR", e.toString());
+        }
+
+
     }
 
     public void deleteAccount(Context context, VolleyCallback callback) {
@@ -482,7 +514,7 @@ public class APIRequest {
     public void deleteProductFromWishlist(int id, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.GIFT +id, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.GIFT + id, null,
                     response -> {
                         // Handle successful response
                         Log.d("DELETE-PRODUCT-SUCCESS", response.toString());
@@ -511,7 +543,7 @@ public class APIRequest {
     public void deleteWishlist(int id, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.WISHLIST +id, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.WISHLIST + id, null,
                     response -> {
                         // Handle successful response
                         Log.d("DELETE-WISHLIST-SUCCESS", response.toString());
@@ -536,4 +568,90 @@ public class APIRequest {
         }
     }
 
+    public void searchUsers(String toString, VolleyCallbackUserArray volleyCallback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.SEARCH_USER + toString, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("SEARCH-USER-SUCCESS", response.toString());
+                        ArrayList<User> users = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject user = response.getJSONObject(i);
+                                users.add(new User(
+                                        user.getInt("id"),
+                                        user.getString("name"),
+                                        user.getString("last_name"),
+                                        user.getString("email"),
+                                        user.getString("image")
+                                ));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                        volleyCallback.onSuccessResponse(users);
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("SEARCH-USER-ERROR", error.toString());
+                        volleyCallback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("SEARCH-USER-ERROR", e.toString());
+        }
+    }
+
+    public void searchProducts(String toString, VolleyCallbackProductArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.SEARCH_PRODUCT + toString, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("SEARCH-PRODUCT-SUCCESS", response.toString());
+                        ArrayList<Product> products = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject product = response.getJSONObject(i);
+                                products.add(new Product(
+                                        product.getInt("id"),
+                                        product.getString("name"),
+                                        product.getString("description"),
+                                        product.getString("photo"),
+                                        product.getDouble("price")
+                                ));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                        callback.onSuccessResponse(products);
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("SEARCH-PRODUCT-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("SEARCH-PRODUCT-ERROR", e.toString());
+        }
+    }
 }

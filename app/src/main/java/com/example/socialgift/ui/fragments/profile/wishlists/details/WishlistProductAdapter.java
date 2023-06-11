@@ -44,7 +44,7 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
     public void onBindViewHolder(@NonNull WishlistProductViewHolder holder, int position) {
         position = holder.getAdapterPosition();
         Product product = products.get(position);
-        holder.getProductName().setText(product.getId() + " " + product.getName());
+        holder.getProductName().setText(product.getName());
         holder.getProductPrice().setText(product.getPrice() + "€");
         Glide.with(context).load(product.getImageURL()).into(holder.getProductImage());
 

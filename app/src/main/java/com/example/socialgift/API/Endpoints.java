@@ -13,6 +13,8 @@ public abstract class Endpoints {
     public static String GIFT = "https://balandrau.salle.url.edu/i3/socialgift/api/v1/gifts/";
     public static String WISHLIST = "https://balandrau.salle.url.edu/i3/socialgift/api/v1/wishlists/";
 
+    public static String SEARCH_PRODUCT = "https://balandrau.salle.url.edu/i3/mercadoexpress/api/v1/products/search?s=";
+
 
 
 }

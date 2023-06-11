@@ -3,7 +3,6 @@ package com.example.socialgift.ui.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProductActivity extends AppCompatActivity {
 
-    private Post product;
+    private Post post;
+    private Product product;
     private FloatingActionButton backActionButton;
     private FloatingActionButton addToWishlistActionButton;
     private ImageView productImage;
@@ -32,25 +32,34 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void setUpViews() {
-        product = (Post) getIntent().getSerializableExtra("product");
+        post = (Post) getIntent().getSerializableExtra("product");
         backActionButton = findViewById(R.id.product_back_fab);
         addToWishlistActionButton = findViewById(R.id.product_add_to_wishlist_fab);
+        addToWishlistActionButton.hide();
         productImage = findViewById(R.id.product_product_image_view);
         productName = findViewById(R.id.product_product_name);
         productPrice = findViewById(R.id.product_product_price);
         productDescription = findViewById(R.id.product_product_description);
-
-        productName.setText(product.getGiftName());
-        productPrice.setText(product.getGiftPrice().toString()+" €");
-        productDescription.setText(product.getDescription());
-
-        Glide.with(this).load(product.getPostImage()).into(productImage);
+        product = (Product) getIntent().getSerializableExtra("searchProduct");
 
 
+        if (post != null) {
+            productName.setText(post.getGiftName());
+            productPrice.setText(post.getGiftPrice().toString() + " €");
+            productDescription.setText(post.getDescription());
 
-        addToWishlistActionButton.setOnClickListener(v -> {
+            Glide.with(this).load(post.getPostImage()).placeholder(R.drawable.image_not_found)
+                    .error(R.drawable.image_not_found).into(productImage);
+        }
+        if (product != null) {
+            productName.setText(product.getName());
+            productPrice.setText(product.getPrice().toString() + " €");
+            productDescription.setText(product.getDescription());
 
-        });
+            Glide.with(this).load(product.getImageURL()).placeholder(R.drawable.image_not_found)
+                    .error(R.drawable.image_not_found).into(productImage);
+        }
+
         backActionButton.setOnClickListener(v -> {
             finish();
         });
