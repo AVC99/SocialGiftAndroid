@@ -13,15 +13,17 @@ public class Wishlist implements Serializable {
     private String name;
     private String description;
     private String endDate;
+    private String creationDate;
     private ArrayList<Gift> gifts;
 
-    public Wishlist(int id, int userId, String name, String description, String endDate, ArrayList<Gift> gifts) {
+    public Wishlist(int id, int userId, String name, String description, String endDate, ArrayList<Gift> gifts, String creationDate) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.description = description;
         this.endDate = endDate;
         this.gifts = gifts;
+        this.creationDate = creationDate;
     }
 
     public int getId() {
@@ -83,7 +85,8 @@ public class Wishlist implements Serializable {
                         array.getJSONObject(i).getString("name"),
                         array.getJSONObject(i).getString("description"),
                         array.getJSONObject(i).getString("end_date"),
-                        Gift.parseJSONArray(array.getJSONObject(i).getJSONArray("gifts"))
+                        Gift.parseJSONArray(array.getJSONObject(i).getJSONArray("gifts")),
+                        array.getJSONObject(i).getString("creation_date")
                 ));
             } catch (JSONException e) {
                 e.printStackTrace();

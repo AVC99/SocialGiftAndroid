@@ -10,33 +10,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="true"
         android:gravity="center"
-        android:orientation="vertical"
-        android:baselineAligned="true">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/wishlist_card_name"
-            android:layout_margin="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="6dp"
             android:text="Wishlist Name"
-            android:textStyle="bold"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/wishlist_card_number_of_products"
-            android:layout_margin="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="6dp"
             android:text="Number of products: 12"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/wishlist_card_end_date"
-            android:layout_margin="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="6dp"
             android:text="End date: 12/6/2023 "
-            android:textSize="18sp"/>
-
+            android:textSize="18sp" />
 
 
         <androidx.cardview.widget.CardView
@@ -44,9 +45,11 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/tertiary"
             app:cardCornerRadius="20dp">
+
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="75dp">
+
                 <TextView
                     android:id="@+id/wishlist_card_description"
                     android:layout_width="match_parent"
@@ -57,9 +60,17 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </ScrollView>
-
-
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/wishlist_card_delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
+            app:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/delete_wishlist"/>
 
     </LinearLayout>
 

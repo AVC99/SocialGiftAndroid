@@ -12,9 +12,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialgift.R;
+import com.example.socialgift.model.Gift;
 import com.example.socialgift.model.Product;
 import com.example.socialgift.model.User;
 import com.example.socialgift.model.Wishlist;
+import com.google.gson.Gson;
 
 
 import org.json.JSONException;
@@ -436,7 +438,7 @@ public class APIRequest {
 
     }
 
-    public void saveProductToWishlist(int wishlistId,  String productUrl, VolleyCallback callback) {
+    public void saveProductToWishlist(int wishlistId, String productUrl, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.GIFT, null,
@@ -476,4 +478,62 @@ public class APIRequest {
             Log.e("SAVE-PRODUCT-ERROR", e.toString());
         }
     }
+
+    public void deleteProductFromWishlist(int id, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.GIFT +id, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("DELETE-PRODUCT-SUCCESS", response.toString());
+                        Log.d("DELETE-PRODUCT-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("DELETE-PRODUCT-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("DELETE-PRODUCT-ERROR", e.toString());
+        }
+    }
+
+    public void deleteWishlist(int id, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Endpoints.WISHLIST +id, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("DELETE-WISHLIST-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("DELETE-WISHLIST-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", "Bearer " + token);
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("DELETE-WISHLIST-ERROR", e.toString());
+        }
+    }
+
 }

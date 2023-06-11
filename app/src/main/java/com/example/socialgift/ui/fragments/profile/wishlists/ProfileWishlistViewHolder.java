@@ -1,6 +1,7 @@
 package com.example.socialgift.ui.fragments.profile.wishlists;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ public class ProfileWishlistViewHolder extends RecyclerView.ViewHolder{
     private TextView wishlistDescription;
     private TextView wishlistProductsCount;
     private TextView wishlistEndDate;
+    private Button wishlistDeleteButton;
 
     public ProfileWishlistViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -20,6 +22,7 @@ public class ProfileWishlistViewHolder extends RecyclerView.ViewHolder{
         wishlistDescription = itemView.findViewById(R.id.wishlist_card_description);
         wishlistProductsCount = itemView.findViewById(R.id.wishlist_card_number_of_products);
         wishlistEndDate = itemView.findViewById(R.id.wishlist_card_end_date);
+        wishlistDeleteButton = itemView.findViewById(R.id.wishlist_card_delete_button);
     }
 
     public TextView getWishlistName() {
@@ -36,5 +39,9 @@ public class ProfileWishlistViewHolder extends RecyclerView.ViewHolder{
 
     public TextView getWishlistEndDate() {
         return wishlistEndDate;
+    }
+
+    public Button getWishlistDeleteButton() {
+        return wishlistDeleteButton;
     }
 }

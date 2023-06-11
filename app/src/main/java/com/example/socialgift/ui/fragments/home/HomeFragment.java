@@ -69,7 +69,9 @@ public class HomeFragment extends Fragment {
                                             posts.add(new Post(u.getName(), u.getImage(),
                                                     result.getName(), result.getPrice(), result.getImageURL(),
                                                     result.getDescription(), result.getId(), g.getProductURL()));
-                                            postAdapter.notifyItemInserted(posts.size() - 1);
+
+                                            postAdapter = new PostAdapter(posts, getContext());
+                                            recyclerView.setAdapter(postAdapter);
                                         }
 
                                         @Override
