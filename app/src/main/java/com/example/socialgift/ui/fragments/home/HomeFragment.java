@@ -102,13 +102,11 @@ public class HomeFragment extends Fragment {
         notificationsButton = getActivity().findViewById(R.id.home_notifications_button);
         recyclerView = getActivity().findViewById(R.id.home_recycler_view);
 
-        postAdapter = new PostAdapter(posts, getContext());
-        recyclerView.setAdapter(postAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        linearLayoutManager.canScrollVertically();
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(postAdapter);
+
 
         notificationsButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), NotificationsActivity.class);
