@@ -11,9 +11,11 @@ import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.example.socialgift.API.APIRequest;
+import com.example.socialgift.API.Endpoints;
 import com.example.socialgift.API.VolleyCallbackWishlistArray;
 import com.example.socialgift.R;
 import com.example.socialgift.model.Post;
+import com.example.socialgift.model.Product;
 import com.example.socialgift.model.Wishlist;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class WishlistSelectionActivity extends AppCompatActivity {
     private WishlistSelectionAdapter wishlistSelectionAdapter;
     private ArrayList<Wishlist> wishlists = new ArrayList<>();
     private Post post;
+    private Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,6 @@ public class WishlistSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wishlist_selection);
         setUpViews();
         getUserWishlists();
-
     }
 
     private void getUserWishlists() {
@@ -60,6 +62,12 @@ public class WishlistSelectionActivity extends AppCompatActivity {
         wishlistRecyclerView = findViewById(R.id.wishlist_selection_recycler_view);
         backButton = findViewById(R.id.wishlist_selection_back_image_view);
         post = (Post) getIntent().getExtras().getSerializable("post");
+        if (post == null) {
+            product = (Product) getIntent().getExtras().getSerializable("product");
+            post = new Post("username", "a", product.getName(), product.getPrice(),
+                    "", "", product.getId(), Endpoints.PRODUCTS + product.getId());
+        }
+
 
         backButton.setOnClickListener(v -> {
             finish();

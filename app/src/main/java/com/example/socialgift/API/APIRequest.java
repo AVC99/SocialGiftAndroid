@@ -106,25 +106,17 @@ public class APIRequest {
     public void addFriend(int id, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, Endpoints.FRIENDS + id, null,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.FRIENDS + id, null,
                     response -> {
                         // Handle successful response
-                        try {
-                            if (response.length() > 0) {
-                                int userId = response.getJSONObject(0).getInt("id");
-                                Log.d("GET-USER-ID-SUCCESS", String.valueOf(userId));
-                                callback.onSuccessResponseString(String.valueOf(userId));
-                            } else {
-                                Log.d("GET-USER-ID-SUCCESS", "No user found");
-                                callback.onSuccessResponseString(null);
-                            }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+
+                        Log.d("ADD-FRIEND-SUCCESS", response.toString());
+
+                        callback.onSuccessResponseString(String.valueOf(userId));
                     },
                     error -> {
                         // Handle error response
-                        Log.e("GET-USER-ID-ERROR", error.toString());
+                        Log.e("ADD-FRIEND-ERROR", error.toString());
                         callback.onErrorResponse(error);
                     }) {
                 @Override
@@ -578,7 +570,7 @@ public class APIRequest {
 
     public void searchUsers(String toString, VolleyCallbackUserArray volleyCallback) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        try{
+        try {
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.SEARCH_USER + toString, null,
                     response -> {
                         // Handle successful response
@@ -615,8 +607,51 @@ public class APIRequest {
                 }
             };
             queue.add(request);
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.e("SEARCH-USER-ERROR", e.toString());
+        }
+    }
+
+    public void searchProducts(String toString, VolleyCallbackProductArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.SEARCH_PRODUCT + toString, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("SEARCH-PRODUCT-SUCCESS", response.toString());
+                        ArrayList<Product> products = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject product = response.getJSONObject(i);
+                                products.add(new Product(
+                                        product.getInt("id"),
+                                        product.getString("name"),
+                                        product.getString("description"),
+                                        product.getString("photo"),
+                                        product.getDouble("price")
+                                ));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                        callback.onSuccessResponse(products);
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("SEARCH-PRODUCT-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("SEARCH-PRODUCT-ERROR", e.toString());
         }
     }
 }

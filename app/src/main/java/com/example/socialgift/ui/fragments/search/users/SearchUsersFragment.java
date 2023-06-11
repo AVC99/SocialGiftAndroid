@@ -26,6 +26,7 @@ public class SearchUsersFragment extends Fragment {
     private RecyclerView recyclerView;
     private UserListAdapter userListAdapter;
     private ArrayList<User> users = new ArrayList<>();
+
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search_users, container, false);
@@ -34,10 +35,10 @@ public class SearchUsersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.search_users_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void search(String toString) {
-        Toast.makeText(getContext(), "searching for " + toString, Toast.LENGTH_SHORT).show();
         APIRequest apiRequest = new APIRequest(getContext());
         apiRequest.searchUsers(toString, new VolleyCallbackUserArray() {
             @Override
@@ -45,8 +46,6 @@ public class SearchUsersFragment extends Fragment {
                 users = result;
                 userListAdapter = new UserListAdapter(users, getContext());
                 recyclerView.setAdapter(userListAdapter);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(linearLayoutManager);
             }
 
             @Override

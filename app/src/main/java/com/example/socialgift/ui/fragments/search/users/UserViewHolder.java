@@ -1,6 +1,7 @@
 package com.example.socialgift.ui.fragments.search.users;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserViewHolder extends RecyclerView.ViewHolder{
-    private CircleImageView profileImage;
+    private ImageView profileImage;
     private TextView userName;
     private TextView userMail;
     private FloatingActionButton addFriendButton;
@@ -24,7 +25,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         addFriendButton = itemView.findViewById(R.id.user_card_fab);
     }
 
-    public CircleImageView getProfileImage() {
+    public ImageView getProfileImage() {
         return profileImage;
     }
 
