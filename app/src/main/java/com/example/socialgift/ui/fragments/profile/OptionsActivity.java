@@ -65,6 +65,7 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     private void removeSharedPreferences() {
+        //TODO: CHECK IF THIS IS WORKING
         // remove access token and id from shared preferences
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences), MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -1,6 +1,13 @@
 package com.example.socialgift.model;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class User implements Serializable {
     private int id;
@@ -55,5 +62,22 @@ public class User implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public static ArrayList<User> parseJsonArray(JSONArray jsonArray){
+        ArrayList<User> users = new ArrayList<>();
+        try{
+            for(int i = 0; i < jsonArray.length(); i++){
+                int id = jsonArray.getJSONObject(i).getInt("id");
+                String name = jsonArray.getJSONObject(i).getString("name");
+                String lastName = jsonArray.getJSONObject(i).getString("last_name");
+                String email = jsonArray.getJSONObject(i).getString("email");
+                String image = jsonArray.getJSONObject(i).getString("image");
+                users.add(new User(id, name, lastName, email, image));
+            }
+        }catch (JSONException e){
+            Log.d("JSON", "Error parsing JSON");
+        }
+        return users;
     }
 }

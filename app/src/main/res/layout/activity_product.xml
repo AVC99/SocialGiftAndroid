@@ -23,6 +23,7 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="40dp">
                 <ImageView
+                    android:id="@+id/product_product_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -36,19 +37,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/product_back_fab"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignStart="@id/product_product_card_view"
                 android:layout_alignTop="@id/product_product_card_view"
                 android:layout_marginStart="10dp"
@@ -58,12 +57,12 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_arrow_back"
                 app:borderWidth="0dp"
-                app:fabCustomSize="70dp" />
+                app:fabCustomSize="50dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/product_add_to_wishlist_fab"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignTop="@id/product_product_card_view"
                 android:layout_alignEnd="@id/product_product_card_view"
                 android:layout_marginTop="10dp"
@@ -72,10 +71,11 @@
                 android:contentDescription="@string/settings"
                 android:src="@drawable/ic_add_wishlist"
                 app:borderWidth="0dp"
-                app:fabCustomSize="70dp" />
+                app:fabCustomSize="50dp" />
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/product_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -84,21 +84,14 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/_999_price"
-            android:textColor="@color/primary_yellow"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
+            android:id="@+id/product_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/product_category"
-            android:textSize="20sp"
+            android:text="@string/_999_price"
+            android:textColor="@color/primary_yellow"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
@@ -107,6 +100,7 @@
             app:cardCornerRadius="40dp">
 
             <TextView
+                android:id="@+id/product_product_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

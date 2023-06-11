@@ -15,6 +15,12 @@
         android:theme="@style/Theme.SocialGift"
         tools:targetApi="31">
         <activity
+            android:name=".ui.fragments.profile.wishlists.details.WishlistDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.wishlistselection.WishlistSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.fragments.profile.OptionsActivity"
             android:exported="false" />
         <activity
