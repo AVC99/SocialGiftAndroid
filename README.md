@@ -51,6 +51,9 @@ Profile with friends display:
 
 Edit profile: 
 
+![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/3962b1ee-aeaf-49f8-aa8a-51347fd2d425)
+
+
 Account options: 
 
 ![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/5a3ffdf2-c2d9-4bf8-a692-db673fffc941)
