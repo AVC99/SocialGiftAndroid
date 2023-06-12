@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialgift.R;
+import com.example.socialgift.model.Message;
 import com.example.socialgift.model.Product;
 import com.example.socialgift.model.User;
 import com.example.socialgift.model.Wishlist;
@@ -22,9 +23,9 @@ import java.util.Map;
 
 
 public class APIRequest {
-    private String token;
-    private int userId;
-    private Context context;
+    private final String token;
+    private final int userId;
+    private final Context context;
 
     public APIRequest(Context context) {
         this.token = context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE).getString(context.getString(R.string.saved_access_token_key), null);
@@ -289,7 +290,7 @@ public class APIRequest {
                         // Handle successful response
                         if (response.length() > 0) {
                             Log.d("GET-FRIEND-SUCCESS", response.toString());
-                            ArrayList<User>friends = User.parseJsonArray(response);
+                            ArrayList<User> friends = User.parseJsonArray(response);
                             callback.onSuccessResponse(friends);
 
                         } else {
@@ -742,9 +743,9 @@ public class APIRequest {
                         body.put("name", name);
                         body.put("description", description);
                         body.put("link", link);
-                        body.put("photo",link);
+                        body.put("photo", link);
                         body.put("price", Double.valueOf(price));
-                        body.put("categoryIds",1);
+                        body.put("categoryIds", 1);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -801,8 +802,137 @@ public class APIRequest {
             };
             queue.add(request);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("REGISTER-ERROR", e.toString());
         }
+    }
+
+    public void getMessagedUsers(VolleyCallbackUserArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.MESSAGED_USERS, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("GET-MESSAGED-USERS-SUCCESS", response.toString());
+                        if (response.length() > 0) {
+                            ArrayList<User> users = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject user = response.getJSONObject(i);
+                                    users.add(new User(user.getInt("id"), user.getString("name"), user.getString("last_name"), user.getString("email"), user.getString("image")));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            callback.onSuccessResponse(users);
+                        }
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-MESSAGED-USERS-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + token);
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GET-MESSAGED-USERS-ERROR", e.toString());
+        }
+    }
+
+    public void getMessages(int id, VolleyCallbackMessagesArray callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Endpoints.MESSAGES + id, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("GET-MESSAGES-SUCCESS", response.toString());
+                        if (response.length() > 0) {
+                            ArrayList<Message> messages = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject message = response.getJSONObject(i);
+                                    messages.add(new Message(
+                                            message.getInt("id"),
+                                            message.getString("content"),
+                                            message.getInt("user_id_send"),
+                                            message.getInt("user_id_recived"),
+                                            message.getString("timeStamp")));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            callback.onSuccessResponse(messages);
+                        }
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("GET-MESSAGES-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + token);
+                    return params;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("GET-MESSAGES-ERROR", e.toString());
+        }
+    }
+
+    public void sendMessage(int receiverId, String message, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.MESSAGES, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("SEND-MESSAGE-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("SEND-MESSAGE-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + token);
+                    return params;
+                }
+
+                @Override
+                public byte[] getBody() {
+                    JSONObject body = new JSONObject();
+                    try {
+                        body.put("content", message);
+                        body.put("user_id_send", userId);
+                        body.put("user_id_recived", receiverId);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return body.toString().getBytes();
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            Log.e("SEND-MESSAGE-ERROR", e.toString());
+        }
+
+
     }
 }

@@ -39,7 +39,7 @@
             android:name=".ui.views.ProductActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.fragments.messages.ChatActivity"
+            android:name=".ui.fragments.messages.chat.ChatActivity"
             android:exported="false" />
         <activity
             android:name=".ui.views.LoginActivity"
