@@ -65,35 +65,6 @@ public class APIRequest {
         }
     }
 
-    public static void registerRequest(String name, String lastName, String email, String password, String image, Context context, VolleyCallback callback) {
-        try {
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("name", name);
-            jsonBody.put("last_name", lastName);
-            jsonBody.put("email", email);
-            jsonBody.put("password", password);
-            jsonBody.put("image", image);
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.REGISTER, jsonBody,
-                    response -> {
-                        // Handle successful response
-                        Log.d("REGISTER-SUCCESS", response.toString());
-                        callback.onSuccessResponseString(response.toString());
-                    },
-                    error -> {
-                        // Handle error response
-                        Log.e("REGISTER-ERROR", error.toString());
-                        callback.onErrorResponse(error);
-                    });
-
-            RequestQueue queue = Volley.newRequestQueue(context);
-            queue.add(request);
-
-        } catch (JSONException e) {
-            Log.e("REGISTER-ERROR", e.toString());
-        }
-    }
-
     public void addFriend(int id, VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
@@ -790,4 +761,48 @@ public class APIRequest {
     }
 
 
+    public void register(String name, String lastName, String email, String password, String link, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.REGISTER, null,
+                    response -> {
+                        // Handle successful response
+                        Log.d("REGISTER-SUCCESS", response.toString());
+                        callback.onSuccessResponseString(response.toString());
+
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("REGISTER-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json");
+                    return headers;
+                }
+
+                @Override
+                public byte[] getBody() {
+                    JSONObject body = new JSONObject();
+                    try {
+                        body.put("name", name);
+                        body.put("last_name", lastName);
+                        body.put("email", email);
+                        body.put("password", password);
+                        body.put("image", link);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return body.toString().getBytes();
+                }
+            };
+            queue.add(request);
+
+        }catch (Exception e){
+            Log.e("REGISTER-ERROR", e.toString());
+        }
+    }
 }

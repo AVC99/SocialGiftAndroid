@@ -17,8 +17,6 @@ import com.example.socialgift.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button loginButton;
-    private Button registerButton;
     private EditText emailEditText;
     private EditText passwordEditText;
 
@@ -27,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginButton = findViewById(R.id.login_login_button);
-        registerButton = findViewById(R.id.login_create_account_button);
+        Button loginButton = findViewById(R.id.login_login_button);
+        Button registerButton = findViewById(R.id.login_create_account_button);
         emailEditText = findViewById(R.id.login_email);
         passwordEditText = findViewById(R.id.login_password);
 
@@ -100,7 +98,12 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+               if (error.networkResponse.statusCode == 401) {
+                   Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
+               }else {
+                   Toast.makeText(LoginActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+               }
+
             }
         });
 
