@@ -12,14 +12,17 @@
         android:title="@string/search_menu_title" />
 
     <item
+        android:id="@+id/placeholder"
+        android:title="" />
+    <item
         android:id="@+id/navigation_messages"
         android:icon="@drawable/ic_messages"
-        android:title="@string/title_notifications" />
+        android:title="@string/messages" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_person"
         android:title="@string/profile_title" />
-    
+
 
 </menu>
