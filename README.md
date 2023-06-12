@@ -1,4 +1,4 @@
-# SocialGiftAndroid
+# Social Gift Android
 Git link: https://github.com/AVC99/SocialGiftAndroid
 
 Social App built in Android that consists of sending and reciving gifts.
