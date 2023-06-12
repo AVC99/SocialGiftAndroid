@@ -199,7 +199,7 @@ public class APIRequest {
     }
 
 
-    public void updateProfileRequest(String name, String lastName, String email, String password, VolleyCallbackUser volleyCallback) {
+    public void updateProfileRequest(String name, String lastName, String email, String password, String link, VolleyCallbackUser volleyCallback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, Endpoints.USERS, null,
@@ -240,6 +240,7 @@ public class APIRequest {
                         jsonBody.put("last_name", lastName);
                         jsonBody.put("email", email);
                         jsonBody.put("password", password);
+                        jsonBody.put("image", link);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
