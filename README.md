@@ -5,6 +5,12 @@ Social App built in Android that consists of sending and reciving gifts.
 
 Build in android using Java and Volley for api requests
 
+API's Used (you will need a LaSalle VPN to access the API's): 
+
+Social Gift (used to manage user interactions and gifts): https://balandrau.salle.url.edu/i3/socialgift/api-docs/v1/
+
+Mercado Express (used to manage products): https://balandrau.salle.url.edu/i3/mercadoexpress/api-docs/v1/
+
 Login: 
 
 ![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/7411dd82-ac21-4f7f-9602-ed47d443c775)
@@ -63,5 +69,6 @@ Create new wishlist:
 ![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/018bd8ce-ab8c-4ccc-85ed-7f23bf0ab604)
 
 Create new gift: 
+
 ![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/06800001-5bf4-4786-89dd-55487d11ce85)
 
