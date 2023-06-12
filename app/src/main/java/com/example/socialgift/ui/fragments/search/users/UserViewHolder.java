@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserViewHolder extends RecyclerView.ViewHolder{
-    private ImageView profileImage;
+    private CircleImageView profileImage;
     private TextView userName;
     private TextView userMail;
     private FloatingActionButton addFriendButton;
@@ -25,7 +25,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         addFriendButton = itemView.findViewById(R.id.user_card_fab);
     }
 
-    public ImageView getProfileImage() {
+    public CircleImageView getProfileImage() {
         return profileImage;
     }
 

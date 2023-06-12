@@ -4,6 +4,7 @@
     android:id="@+id/search_users_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:listitem="@layout/user_card"
+    tools:listitem="@layout/product_card"
     tools:context=".ui.fragments.search.users.SearchUsersFragment">
+
 </androidx.recyclerview.widget.RecyclerView>

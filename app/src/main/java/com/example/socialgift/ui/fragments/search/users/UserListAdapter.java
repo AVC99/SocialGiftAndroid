@@ -1,7 +1,9 @@
 package com.example.socialgift.ui.fragments.search.users;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.example.socialgift.API.APIRequest;
 import com.example.socialgift.API.VolleyCallback;
 import com.example.socialgift.R;
 import com.example.socialgift.model.User;
+import com.example.socialgift.ui.views.profile.UserProfile;
 
 import java.util.ArrayList;
 
@@ -34,7 +37,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserViewHolder>{
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.user_card, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card, parent, false);
         return new UserViewHolder(view);
     }
 
@@ -50,6 +53,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserViewHolder>{
                 .placeholder(R.drawable.image_not_found)
                 .error(R.drawable.image_not_found)
                 .into(holder.getProfileImage());
+
+        holder.getUserName().setOnClickListener(v -> goToUser(user));
+        holder.getUserMail().setOnClickListener(v -> goToUser(user));
+        holder.getProfileImage().setOnClickListener(v -> goToUser(user));
 
         holder.getAddFriendButton().setOnClickListener(v -> {
             APIRequest apiRequest = new APIRequest(context);
@@ -69,6 +76,12 @@ public class UserListAdapter extends RecyclerView.Adapter<UserViewHolder>{
             });
         });
 
+    }
+
+    private void goToUser(User user) {
+        Intent intent = new Intent(context, UserProfile.class);
+        intent.putExtra("user", user);
+        context.startActivity(intent);
     }
 
     @Override
