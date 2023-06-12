@@ -74,4 +74,6 @@ Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras
     <string name="wishlists">Wishlists</string>
     <string name="number_of_products_12">Number of products: 12</string>
     <string name="end_date_12_6_2023">End date: 12/6/2023</string>
+    <string name="friend_message">Friend Message</string>
+    <string name="user_message">User Message</string>
 </resources>

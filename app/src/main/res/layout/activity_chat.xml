@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.messages.ChatActivity">
+    tools:context=".ui.fragments.messages.chat.ChatActivity">
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="40dp"
-        android:backgroundTint="@color/quaternary">
+        android:backgroundTint="@color/quaternary"
+        android:elevation="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,8 +23,8 @@
                 android:id="@+id/chat_back_button_image_view"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_arrow_back" />
 
@@ -32,32 +32,34 @@
                 android:id="@+id/chat_profile_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_margin="5dp"
                 android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:src="@drawable/ic_launcher_background"
                 app:civ_border_color="@color/black"
                 app:civ_border_width="1dp" />
 
             <TextView
+                android:id="@+id/chat_username"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/username"
-                android:textStyle="bold"
                 android:textSize="26sp"
-                android:layout_marginStart="10dp"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        tools:listitem="@layout/message" />
 
-    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,13 +86,12 @@
             android:id="@+id/chat_send_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:fabCustomSize="50dp"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/search_a_user_or_a_product"
-            android:src="@drawable/ic_send" />
+            android:src="@drawable/ic_send"
+            app:fabCustomSize="50dp" />
     </LinearLayout>
-
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -62,16 +62,6 @@
             android:contentDescription="@string/search_a_user_or_a_product"
             android:src="@drawable/ic_search"
             app:fabCustomSize="50dp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/messages_new_chat_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:contentDescription="@string/start_new_chat"
-            android:src="@drawable/ic_baseline_add"
-            app:fabCustomSize="50dp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
