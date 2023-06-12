@@ -31,9 +31,19 @@ Search users:
 
 ![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/ba2172b7-578d-4a85-b8f2-49e78ef09edd)
 
+User details: 
+
+![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/e80b5e69-5267-46a1-88a5-9c939f5ff72e)
+
+
 Search Gifts: 
 
 ![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/f9ed1814-f54c-4049-aaf8-da89ed4c0b50)
+
+Gift details: 
+
+![image](https://github.com/AVC99/SocialGiftAndroid/assets/92750813/e29b1457-c0d1-4bba-a217-c0b8ac96a4a0)
+
 
 Recent Messages (you can also search for any user to message):
 
