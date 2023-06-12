@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialgift.R;
 
 public class ChatViewHolder extends RecyclerView.ViewHolder{
-    private TextView userMessage;
-    private TextView friendMessage;
+    private final TextView userMessage;
+    private final TextView friendMessage;
 
-    private CardView userCard;
-    private CardView friendCard;
+    private final CardView userCard;
+    private final CardView friendCard;
     public ChatViewHolder(@NonNull View itemView) {
         super(itemView);
         this.userMessage = itemView.findViewById(R.id.user_message);
