@@ -1,11 +1,7 @@
 package com.example.socialgift.API;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,19 +9,13 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialgift.R;
-import com.example.socialgift.model.Gift;
 import com.example.socialgift.model.Product;
 import com.example.socialgift.model.User;
 import com.example.socialgift.model.Wishlist;
-import com.google.gson.Gson;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -236,17 +226,6 @@ public class APIRequest {
         }
     }
 
-    public static void uploadImageRequest(Uri imageUri, Context context, VolleyCallback callback) {
-        byte[] imageBytes = null;
-        try {
-            InputStream inputStream = context.getContentResolver().openInputStream(imageUri);
-            imageBytes = new byte[inputStream.available()];
-        } catch (IOException e) {
-            Log.e("UPLOAD-IMAGE-ERROR", e.toString());
-        }
-        //TODO: Upload image to server
-    }
-
 
     public void updateProfileRequest(String name, String lastName, String email, String password, VolleyCallbackUser volleyCallback) {
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -339,8 +318,7 @@ public class APIRequest {
                         // Handle successful response
                         if (response.length() > 0) {
                             Log.d("GET-FRIEND-SUCCESS", response.toString());
-                            ArrayList<User> friends = new ArrayList<>();
-                            friends = User.parseJsonArray(response);
+                            ArrayList<User>friends = User.parseJsonArray(response);
                             callback.onSuccessResponse(friends);
 
                         } else {
@@ -762,4 +740,54 @@ public class APIRequest {
         }
 
     }
+
+    public void createGift(String name, String description, String price, String link, VolleyCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        try {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Endpoints.PRODUCTS, null,
+                    response -> {
+                        // Handle successful response
+
+                        Log.d("ADD-FRIEND-SUCCESS", response.toString());
+
+                        callback.onSuccessResponseString(String.valueOf(userId));
+                    },
+                    error -> {
+                        // Handle error response
+                        Log.e("ADD-FRIEND-ERROR", error.toString());
+                        callback.onErrorResponse(error);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json");
+                    return headers;
+                }
+
+                @Override
+                public byte[] getBody() {
+                    JSONObject body = new JSONObject();
+                    try {
+                        body.put("name", name);
+                        body.put("description", description);
+                        body.put("link", link);
+                        body.put("photo",link);
+                        body.put("price", Double.valueOf(price));
+                        body.put("categoryIds",1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return body.toString().getBytes();
+                }
+            };
+            queue.add(request);
+
+        } catch (Exception e) {
+            Log.d("CREATE-GIFT-ERROR", e.toString());
+        }
+
+    }
+
+
 }

@@ -68,4 +68,5 @@ Gravida dictum fusce ut placerat. Maecenas sed enim ut sem viverra aliquet. Cras
     <string name="remove_friend">Remove friend</string>
     <string name="wishlist_name">Wishlist Name</string>
     <string name="delete_wishlist">Delete wishlist</string>
+    <string name="item_link">Item Link</string>
 </resources>

@@ -30,9 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText nameEditText;
     private EditText surnameEditText;
-    private Button createAccountButton;
-    private Button loginButton;
-    private ImageButton addProfileImageButton;
     private ActivityResultLauncher<Intent> mGetContent;
 
     private CircleImageView profileImageView;
@@ -47,9 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
         surnameEditText = findViewById(R.id.register_surname_edit_text);
         emailEditText = findViewById(R.id.register_email_edit_text);
         passwordEditText = findViewById(R.id.register_password_edit_text);
-        createAccountButton = findViewById(R.id.register_create_account_button);
-        loginButton = findViewById(R.id.register_login_button);
-        addProfileImageButton = findViewById(R.id.register_add_profile_image_button);
+        Button createAccountButton = findViewById(R.id.register_create_account_button);
+        Button loginButton = findViewById(R.id.register_login_button);
+        ImageButton addProfileImageButton = findViewById(R.id.register_add_profile_image_button);
         profileImageView = findViewById(R.id.register_add_profile_image_circle_image);
 
         //Set the activity result launcher
@@ -98,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri imageUri) {
-        APIRequest.uploadImageRequest(imageUri, this, new VolleyCallback() {
+       /* APIRequest.uploadImageRequest(imageUri, this, new VolleyCallback() {
             @Override
             public void onSuccessResponseString(String result) {
                 Toast.makeText(RegisterActivity.this, "Image uploaded", Toast.LENGTH_SHORT).show();
@@ -108,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(RegisterActivity.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     private void createAccount(String name, String lastName, String email, String password) {
@@ -125,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (error.networkResponse.statusCode == 409) {
                     Toast.makeText(RegisterActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
                 }
             }
         });
