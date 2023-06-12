@@ -23,12 +23,8 @@ import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ImageView backButton;
-    private ImageView profileImage;
-    private TextView username;
     private RecyclerView recyclerView;
     private ChatAdapter chatAdapter;
-    private FloatingActionButton sendButton;
     private EditText messageEditText;
     private User user;
     ArrayList<Message> messages = new ArrayList<>();
@@ -64,10 +60,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private void setUpViews() {
         this.user = (User) getIntent().getSerializableExtra("user");
-        backButton = findViewById(R.id.chat_back_button_image_view);
-        profileImage = findViewById(R.id.chat_profile_image);
-        username = findViewById(R.id.chat_username);
-        sendButton = findViewById(R.id.chat_send_button);
+        ImageView backButton = findViewById(R.id.chat_back_button_image_view);
+        ImageView profileImage = findViewById(R.id.chat_profile_image);
+        TextView username = findViewById(R.id.chat_username);
+        FloatingActionButton sendButton = findViewById(R.id.chat_send_button);
         messageEditText = findViewById(R.id.chat_message_edit_text);
         recyclerView = findViewById(R.id.chat_recycler_view);
 
@@ -94,7 +90,7 @@ public class ChatActivity extends AppCompatActivity {
         }
         apiRequest.sendMessage(user.getId(), messageEditText.getText().toString(), new VolleyCallback() {
             @Override
-            public void onSuccessResponseString(String result){
+            public void onSuccessResponseString(String result) {
                 loadMessages();
                 messageEditText.setText("");
             }
