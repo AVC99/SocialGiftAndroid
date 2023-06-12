@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -21,10 +22,10 @@ import java.util.ArrayList;
 public class WishlistDetailsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ImageView backArrow;
     private Wishlist wishlist;
     private ArrayList<Product> products = new ArrayList<>();
     private WishlistProductAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +58,14 @@ public class WishlistDetailsActivity extends AppCompatActivity {
     }
 
     private void setUpViews() {
-        this.backArrow = findViewById(R.id.wishlist_details_back_button);
+        ImageView backArrow = findViewById(R.id.wishlist_details_back_button);
         this.recyclerView = findViewById(R.id.wishlist_details_recycler_view);
         this.wishlist = (Wishlist) getIntent().getSerializableExtra("wishlist");
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        TextView wishlistName = findViewById(R.id.wishlist_details_title);
+        wishlistName.setText(wishlist.getName());
 
 
-        this.backArrow.setOnClickListener(v -> finish());
+        backArrow.setOnClickListener(v -> finish());
     }
 }
